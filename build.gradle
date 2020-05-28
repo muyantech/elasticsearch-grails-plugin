@@ -157,12 +157,6 @@ bootJar.enabled = false
 
 
 publishing {
-    publications {
-        gpr("default") {
-            from(components["java"])
-            // Include any other artifacts here, like javadocs
-        }
-    }
 
     repositories {
         maven {
@@ -175,6 +169,12 @@ publishing {
         }
     }
 
+  publications {
+        gpr(MavenPublication) {
+            from(components.java)
+        }
+    }
+}
 
 apply from: "gradle/documentation.gradle"
 
