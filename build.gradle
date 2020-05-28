@@ -155,6 +155,27 @@ bootRun {
 // enable if you wish to package this plugin as a standalone application
 bootJar.enabled = false
 
+
+publishing {
+    publications {
+        gpr("default") {
+            from(components["java"])
+            // Include any other artifacts here, like javadocs
+        }
+    }
+
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri("https://maven.pkg.github.com/muyantech/elasticsearch-grails-plugin")
+            credentials {
+                username = System.getenv("GITHUB_ACTOR")
+                password = System.getenv("GITHUB_TOKEN")
+            }
+        }
+    }
+
+
 apply from: "gradle/documentation.gradle"
 
 apply from: "gradle/publish.gradle"
