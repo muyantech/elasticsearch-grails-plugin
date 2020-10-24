@@ -22,7 +22,7 @@ plugins {
     id "de.undercouch.download" version "4.1.1"
 }
 
-version "3.0.2.BUILD-SNAPSHOT"
+version "3.0.3.BUILD-SNAPSHOT"
 group "org.grails.plugins"
 
 apply plugin: 'eclipse'
@@ -41,6 +41,7 @@ targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    mavenLocal()
     maven { url "https://repo.grails.org/grails/core" }
 }
 

@@ -52,7 +52,12 @@ class ClientNodeFactoryBean implements FactoryBean {
             List<HttpHost> httpHostList = []
             elasticSearchContextHolder.config.client.hosts.each {
                 int port = (it.port instanceof String)? Integer.valueOf(it.port) : it.port
-                httpHostList << new HttpHost("${it.host}", port)
+                String schema = it.schema
+                if (schema != null && schema != '') {
+                    httpHostList << new HttpHost("${it.host}", port, schema)
+                } else {
+                    httpHostList << new HttpHost("${it.host}", port)
+                }
             }
             HttpHost[] httpHosts = httpHostList
             builder = RestClient.builder(httpHosts)
