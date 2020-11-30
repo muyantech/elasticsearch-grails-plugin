@@ -149,14 +149,12 @@ class ElasticsearchGrailsPlugin extends Plugin {
 
     @Override
     void doWithApplicationContext() {
-        Thread.start {
-            def configurator = applicationContext.getBean(SearchableClassMappingConfigurator)
-            configurator.configureAndInstallMappings()
-            if (!grailsApplication.config.getProperty("elasticSearch.disableDynamicMethodsInjection", Boolean, false)) {
-                DomainDynamicMethodsUtils.injectDynamicMethods(grailsApplication, applicationContext)
-            }
-        }
+        def configurator = applicationContext.getBean(SearchableClassMappingConfigurator)
+        configurator.configureAndInstallMappings()
 
+        if (!grailsApplication.config.getProperty("elasticSearch.disableDynamicMethodsInjection", Boolean, false)) {
+            DomainDynamicMethodsUtils.injectDynamicMethods(grailsApplication, applicationContext)
+        }
     }
 
 }
